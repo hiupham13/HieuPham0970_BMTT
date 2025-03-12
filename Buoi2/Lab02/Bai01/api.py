@@ -1,7 +1,8 @@
+from cipher.vigenere import VigenereCipher
+# Compare this snippet from Buoi2/Lab02/Bai01/app.py:
 from flask import Flask, request, jsonify
 from cipher.caesar import CaesarCipher  # Corrected class name
 app = Flask(__name__)
-
 # CAESAR CIPHER ALGORITHM
 caesar_cipher = CaesarCipher()
 
@@ -20,7 +21,14 @@ def caesar_decrypt():
     key = int(data['key'])
     decrypted_text = caesar_cipher.decrypt_text(cipher_text, key)
     return jsonify({"decrypted_message": decrypted_text})
-
+vigenere_cipher = VigenereCipher()
+@app.route("/api/vigenere/encrypt", methods=["POST"])
+def vigenere_encrypt():
+    data = request.json
+    plain_text = data['plain_text']
+    key = data['key']
+    encrypted_text = vigenere_cipher.vigenere_encrypt(plain_text, key)
+    return jsonify({"encrypted_text": encrypted_text})
 # main function
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
