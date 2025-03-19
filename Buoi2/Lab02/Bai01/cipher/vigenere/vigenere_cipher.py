@@ -16,7 +16,8 @@ class VigenereCipher:
             else:
                 encrypted_text += char  # Thêm ký tự không phải là chữ cái
         return encrypted_text
-    def vigenere_decrypt(self,encrypted_text,key):
+
+    def vigenere_decrypt(self, encrypted_text, key):
         decrypted_text = ""
         key_index = 0
         for char in encrypted_text:
@@ -29,4 +30,4 @@ class VigenereCipher:
                 key_index += 1
             else:
                 decrypted_text += char
-
+        return decrypted_text  # Thêm dòng này để trả về decrypted_text
